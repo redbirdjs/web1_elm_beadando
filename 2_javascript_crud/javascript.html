@@ -9,35 +9,39 @@
 <body>
   <h1>JavaScript CRUD - Gépek</h1>
 
-  <table id="update-table">
-    <thead>
-      <tr>
-        <th colspan="5" id="update-table-title">Új adat hozzáadása</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <input type="number" name="id" id="id" placeholder="ID">
-        </td>
-        <td>
-          <input type="text" name="hely" id="hely" placeholder="Hely">
-        </th>
-        <td>
-          <input type="text" name="tipus" id="tipus" placeholder="Típus">
-        </td>
-        <td>
-          <input type="text" name="ipcim" id="ipcim" placeholder="IP-cím">
-        </td>
-        <td>
-          <div class="data-buttons">
-            <button style="display: block;" id="button-create" onclick="onCreateClick()" class="green-btn">Hozzáadás</button>
-            <button style="display: none;" id="button-update" onclick="onConfirmUpdateClick()" class="green-btn">Módosítás</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div id="update-form" class="hidden">
+    <div class="container">
+      <table id="update-table">
+        <thead>
+          <tr>
+            <th colspan="5">Új adat hozzáadása</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="number" name="id" id="id" placeholder="ID">
+            </td>
+            <td>
+              <input type="text" name="hely" id="hely" placeholder="Hely">
+            </th>
+            <td>
+              <input type="text" name="tipus" id="tipus" placeholder="Típus">
+            </td>
+            <td>
+              <input type="text" name="ipcim" id="ipcim" placeholder="IP-cím">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="data-buttons">
+        <button id="button-create" class="green-btn">Hozzáadás</button>
+        <button id="button-update" class="green-btn">Módosítás</button>
+        <button id="button-cancel" class="red-btn">Mégse</button>
+      </div>
+    </div>
+  </div>
 
   <table id="data-table">
     <thead>
@@ -47,6 +51,9 @@
         <th>Típus</th>
         <th>IP-cím</th>
         <th>Műveletek</th>
+      </tr>
+      <tr>
+        <td colspan="5" class="new-data-row" onclick="onCreateClick()">+ Új adat felvétele</td>
       </tr>
     </thead>
     <tbody>

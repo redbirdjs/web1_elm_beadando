@@ -34,10 +34,10 @@ class Data {
       });
   
       this._state = DataStates.LOADED;
-      console.log(this._data);
     } catch (err) {
       this._state = DataStates.FAILED;
       console.error(err);
+      cAlert("error", "Hiba történt az adatok feltöltése közben!");
     }
   }
 
@@ -104,109 +104,156 @@ class Data {
   }
 }
 
+
+
+class UpdateForm {
+  _main;
+  _table;
+  _title;
+  _inputs;
+  _buttons;
+
+  _updateIndex;
+
+  constructor() {
+    this._main = document.querySelector("#update-form");
+    this._table = document.querySelector("#update-table");
+    this._title = this._main.querySelector("th");
+    
+
+    this._inputs = {
+      id: this._table.querySelector("input#id"),
+      hely: this._table.querySelector("input#hely"),
+      tipus: this._table.querySelector("input#tipus"),
+      ipcim: this._table.querySelector("input#ipcim")
+    };
+
+
+    this._buttons = {
+      create: this._main.querySelector("#button-create"),
+      update: this._main.querySelector("#button-update"),
+      cancel: this._main.querySelector("#button-cancel")
+    };
+
+    this._buttons.create.onclick = () => { this.onCreateClick() };
+    this._buttons.update.onclick = () => { this.onUpdateClick() };
+    this._buttons.cancel.onclick = () => { this.hide() };
+
+    this._main.onclick = (e) => {
+      if (e.target !== this._main) return;
+      this.hide();
+    }
+
+    
+    this._updateIndex = null;
+    this._main.classList.add("hidden");
+  }
+
+
+  getValuesObject(oldId) {
+    const id = Number(this._inputs.id.value.trim());
+    const hely = this._inputs.hely.value.trim();
+    const tipus = this._inputs.tipus.value.trim();
+    const ipcim = this._inputs.ipcim.value.trim();
+
+    if (id !== oldId && (isNaN(id) || data.get(id)))
+      return "Hiba! Az [ID] mező kitöltése kötelező és egyedi szám kell legyen.";
+
+    if (!hely || hely === "")
+      return "Hiba! A [Hely] mező kitöltése kötelező!";
+
+    if (!tipus || tipus === "")
+      return "Hiba! A [Típus] mező kitöltése kötelező!";
+
+    if (!ipcim || ipcim === "" || !/^\d+\.\d+\.\d+\.\d+$/.test(ipcim))
+      return "Hiba! Az [IP-cím] mező kitöltése kötelező és IP-cím formátumú kell legyen!";
+
+    return { id, hely, tipus, ipcim };
+  }
+
+
+  showCreateData() {
+    Object.values(this._inputs).forEach(input => input.value = "");
+
+    this._buttons.create.style.display = "block";
+    this._buttons.update.style.display = "none";
+
+    this._main.classList.remove("hidden");
+  }
+
+  onCreateClick() {
+    const values = this.getValuesObject();
+    if (typeof values === "string") return cAlert("error", values);
+
+    data.create(values);
+    data.render();
+
+    window.scrollTo({ top: document.body.clientHeight, behavior: 'smooth' });
+    this.hide();
+
+    cAlert("success", "Sikeres adatfelvétel!")
+  }
+
+
+  showUpdateData(index) {
+    const values = data.getByIndex(index);
+    Object.keys(values).forEach(key => this._inputs[key].value = values[key]);
+
+    this._buttons.create.style.display = "none";
+    this._buttons.update.style.display = "block";
+
+    this._main.classList.remove("hidden");
+    this._updateIndex = index;
+  }
+
+  onUpdateClick() {
+    if (this._updateIndex === null) return;
+
+    const oldValues = data.getByIndex(this._updateIndex);
+
+    const values = this.getValuesObject(isNaN(oldValues.id) ? Infinity : oldValues.id);
+    if (typeof values === "string") return cAlert("error", values);
+
+    data.update(this._updateIndex, values);
+    data.render();
+
+    this._updateIndex = null;
+    this.hide();
+
+    cAlert("success", "Sikeres módosítás!")
+  }
+
+
+  hide() {
+    this._main.classList.add("hidden");
+  }
+}
+
+
+
 const data = new Data("gep.txt");
-
-const idInput = document.querySelector("#update-table input#id");
-const helyInput = document.querySelector("#update-table input#hely");
-const tipusInput = document.querySelector("#update-table input#tipus");
-const ipcimInput = document.querySelector("#update-table input#ipcim");
-
-const utableTitle = document.getElementById("update-table-title");
-const createBtn = document.getElementById("button-create");
-const updateBtn = document.getElementById("button-update");
+const form = new UpdateForm();
 
 
-function getDataFromUpdateTable() {
-  const id = idInput.value.trim();
-  const hely = helyInput.value.trim();
-  const tipus = tipusInput.value.trim();
-  const ipcim = ipcimInput.value.trim();
-
-  if (!id || id === "" || isNaN(id) || data.get(id))
-    return "Hibás ID!";
-
-  if (!hely || hely === "")
-    return "Hibás hely!";
-
-  if (!tipus || tipus === "")
-    return "Hibás típus!";
-
-  if (!ipcim || ipcim === "" || !/^\d+\.\d+\.\d+\.\d+$/.test(ipcim))
-    return "Hibás IP-cím!";
-
-  return { id, hely, tipus, ipcim };
+function cAlert(type, message) {
+  const d = document.createElement("div");
+  d.className = `alert ${type}`;
+  d.textContent = message;
+  document.body.append(d);
 }
-
-function clearUpdateTable() {
-  idInput.value = "";
-  helyInput.value = "";
-  tipusInput.value = "";
-  ipcimInput.value = "";
-}
-
 
 function onCreateClick() {
-  const values = getDataFromUpdateTable();
-  if (typeof values === "string") return console.warn(values);
-
-  data.create(values);
-  data.render();
-
-  clearUpdateTable();
-  window.scrollTo({ top: document.body.clientHeight, behavior: 'smooth' });
+  form.showCreateData();
 }
-
-
-let updateIndex = null;
 
 function onUpdateClick(index) {
-  utableTitle.textContent = "Adat módosítása";
-  updateBtn.style.display = "block";
-  createBtn.style.display = "none";
-
-  const values = data.getByIndex(index);
-
-  idInput.value = values.id;
-  helyInput.value = values.hely;
-  tipusInput.value = values.tipus;
-  ipcimInput.value = values.ipcim;
-
-  updateIndex = index;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  form.showUpdateData(index);
 }
-
-function onConfirmUpdateClick() {
-  if (!updateIndex) return;
-
-  const values = getDataFromUpdateTable();
-  if (typeof values === "string") return console.warn(values);
-
-  data.update(updateIndex, values);
-  data.render();
-
-  clearUpdateTable();
-  utableTitle.textContent = "Új adat hozzáadása";
-  updateBtn.style.display = "none";
-  createBtn.style.display = "block";
-  
-  const element = document.getElementById(`data-index-${updateIndex}`)
-  const position = element.getBoundingClientRect();
-  window.scrollTo({ top: position.top + window.scrollY - window.innerHeight/2, behavior: 'smooth' });
-  
-  updateIndex = null;
-}
-
 
 function onDeleteClick(index) {
   data.delete(index);
   data.render();
-
-  clearUpdateTable();
-  utableTitle.textContent = "Új adat hozzáadása";
-  updateBtn.style.display = "none";
-  createBtn.style.display = "block";
-
-  updateIndex = null;
+  cAlert("success", "Sikeres adattörlés!")
 }
 
 
