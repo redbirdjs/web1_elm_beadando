@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+
+  --primary-color: #2480a8;
+  --primary-hover-color: #1d6fa5;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background: var(--primary-color);
+  border-radius: 2rem;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--primary-hover-color);
+}
+
+
+
+/* HEADER */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  /* aspect-ratio: 3; */
+  height: 100svh;
+  padding: 1rem 1rem;
+  /* color: #fff; */
+  background-image: url("");
+  background-size: cover;
+  background-position: center;
+}
+
+header h1 {
+  font-size: 2.4rem;
+}
+
+header button {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+}
+
+
+
+/* CONTENT */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 2rem;
+  padding: 4rem 0;
+  background: #fff;
+}
+
+.box {
+  position: relative;
+  width: 24rem;
+  height: max-content;
+  padding: 0.5rem 1rem 1rem 1rem;
+  color: #fff;
+  background: #333;
+  transition: box-shadow 0.25s;
+}
+
+.box:hover {
+  box-shadow: 0 0 2.5rem #0008;
+}
+
+.box h3 {
+  font-weight: normal;
+  font-size: 1.6rem;
+  width: 100%;
+  margin: -0.5rem 0 0.5rem -1rem;
+  padding: 0.2rem 1rem;
+  background: #222;
+}
+
+.box img {
+  aspect-ratio: 16/9;
+  width: 50%;
+  margin-top: 1rem;
+}
+
+.box button {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+}
+
+
+
+/* FOOTER */
+footer {
+  display: flex;
+  gap: 10rem;
+  padding: 2rem 5rem;
+  font-size: 1.1rem;
+  color: #fff;
+  background: #000;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  padding: 0 2rem 0 0.2rem;
+}
+
+footer ul li:first-child {
+  position: relative;
+  margin-bottom: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+footer ul li:first-child::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #ccc;
+}
