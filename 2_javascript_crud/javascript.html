@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="javascript.css">
+  <title>JavaScript CRUD</title>
+</head>
+<body>
+  <h1>JavaScript CRUD - Gépek</h1>
+
+  <table id="update-table">
+    <thead>
+      <tr>
+        <th colspan="5" id="update-table-title">Új adat hozzáadása</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="number" name="id" id="id" placeholder="ID">
+        </td>
+        <td>
+          <input type="text" name="hely" id="hely" placeholder="Hely">
+        </th>
+        <td>
+          <input type="text" name="tipus" id="tipus" placeholder="Típus">
+        </td>
+        <td>
+          <input type="text" name="ipcim" id="ipcim" placeholder="IP-cím">
+        </td>
+        <td>
+          <div class="data-buttons">
+            <button style="display: block;" id="button-create" onclick="onCreateClick()" class="green-btn">Hozzáadás</button>
+            <button style="display: none;" id="button-update" onclick="onConfirmUpdateClick()" class="green-btn">Módosítás</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Hely</th>
+        <th>Típus</th>
+        <th>IP-cím</th>
+        <th>Műveletek</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+
+  <script src="javascript.js"></script>
+</body>
+</html>
