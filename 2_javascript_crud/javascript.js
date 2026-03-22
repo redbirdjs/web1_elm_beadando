@@ -175,6 +175,7 @@ class UpdateForm {
   showCreateData() {
     Object.values(this._inputs).forEach(input => input.value = "");
 
+    this._title.textContent = "Új adat hozzáadása";
     this._buttons.create.style.display = "block";
     this._buttons.update.style.display = "none";
 
@@ -199,6 +200,7 @@ class UpdateForm {
     const values = data.getByIndex(index);
     Object.keys(values).forEach(key => this._inputs[key].value = values[key]);
 
+    this._title.textContent = "Adat módosítása";
     this._buttons.create.style.display = "none";
     this._buttons.update.style.display = "block";
 
