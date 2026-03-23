@@ -82,13 +82,13 @@ function App() {
             <tbody>
               <tr>
                 <td>
-                  <input type="number" name="id" id="id" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} disabled={updateFormState == "update"} />
+                  <input type="number" name="id" id="id" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} required={true} disabled={updateFormState == "update"} />
                 </td>
                 <td>
-                  <input type="text" name="nev" id="nev" placeholder="Név" value={nev} onChange={(e) => setNev(e.target.value)} />
+                  <input type="text" name="nev" id="nev" placeholder="Név" value={nev} onChange={(e) => setNev(e.target.value)} required={true} />
                 </td>
                 <td>
-                  <input type="text" name="kategoria" id="kategoria" placeholder="Kategória" value={kategoria} onChange={(e) => setKategoria(e.target.value)} />
+                  <input type="text" name="kategoria" id="kategoria" placeholder="Kategória" value={kategoria} onChange={(e) => setKategoria(e.target.value)} required={true} />
                 </td>
               </tr>
             </tbody>
