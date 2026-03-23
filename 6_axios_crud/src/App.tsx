@@ -112,10 +112,8 @@ function App() {
   
   useEffect(() => {
     (async () => {
-      setData(() => [
-        { id: 1, nev: "AIR", kategoria: "plug-in" },
-        { id: 2, nev: "FastStone Image Viewer", kategoria: "képkezelés" }
-      ])
+      const results = await axios.get(serverUrl);
+      setData(results.data);
     })();
   }, []);
 
