@@ -35,7 +35,7 @@ function postHandler($conn, $input) {
         $stmt->execute(['id' => $rowid]);
         $result = $stmt->fetch();
 
-        echo json_encode(['message' => 'Sikeresen hozzáadva!', 'result' => $result]);
+        echo json_encode(['message' => 'Adatsor sikeresen hozzáadva!', 'result' => $result]);
     } catch (PDOException $e) {
         echo json_encode(['error' => $e->getMessage()]);
     }
