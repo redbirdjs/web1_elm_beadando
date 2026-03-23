@@ -42,7 +42,14 @@ function postHandler($conn, $input) {
 }
 
 function putHandler($conn, $input) {
+    try {
+        $stmt = $conn->prepare('UPDATE szoftver SET nev = :nev, kategoria = :kategoria WHERE id = :id');
+        $stmt->execute(['id' => $input['id'], 'nev' => $input['nev'], 'kategoria' => $input['kategoria']]);
 
+        echo json_encode(['message' => 'Adatsor sikeresen módosítva!']);
+    } catch (PDOException $e) {
+        echo json_encode(['error' => $e->getMessage()]);
+    }
 }
 
 function deleteHandler($conn, $input) {
