@@ -1,10 +1,12 @@
+:root {
+  --primary-color: #2480a8;
+  --primary-hover-color: #1d6fa5;
+}
+
 * {
   margin: 0;
   padding: 0;
   font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-
-  --primary-color: #2480a8;
-  --primary-hover-color: #1d6fa5;
 }
 
 body {
@@ -47,6 +49,7 @@ header {
 
 header h1 {
   font-size: 2.4rem;
+  text-align: center;
 }
 
 header button {
@@ -71,10 +74,24 @@ main {
   position: relative;
   width: 24rem;
   height: max-content;
+  min-height: 8rem;
   padding: 0.5rem 1rem 1rem 1rem;
   color: #fff;
   background: #333;
   transition: box-shadow 0.25s;
+
+  --box-animation-duration: 1s;
+}
+
+@keyframes box-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .box:hover {
@@ -109,7 +126,8 @@ main {
 /* FOOTER */
 footer {
   display: flex;
-  gap: 10rem;
+  flex-wrap: wrap;
+  gap: 1.6em 10rem;
   padding: 2rem 5rem;
   font-size: 1.1rem;
   color: #fff;
