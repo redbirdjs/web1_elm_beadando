@@ -14,7 +14,11 @@ switch ($method) {
 }
 
 function getHandler($conn) {
+    $stmt = $conn->prepare('SELECT * FROM szoftver');
+    $stmt->execute();
+    $result = $stmt->fetchAll();
 
+    echo json_encode($result);
 }
 
 function postHandler($conn, $input) {
