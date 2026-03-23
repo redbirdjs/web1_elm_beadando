@@ -26,7 +26,19 @@ function getHandler($conn) {
 }
 
 function postHandler($conn, $input) {
+    try {
+        $stmt = $conn->prepare('INSERT INTO szoftver (nev, kategoria) VALUES (:nev, :kategoria)');
+        $stmt->execute(['nev' => $input['nev'], 'kategoria' => $input['kategoria']]);
+        $rowid = $conn->lastInsertId();
 
+        $stmt = $conn->prepare('SELECT * FROM szoftver WHERE id = :id');
+        $stmt->execute(['id' => $rowid]);
+        $result = $stmt->fetch();
+
+        echo json_encode(['message' => 'Sikeresen hozzáadva!', 'result' => $result]);
+    } catch (PDOException $e) {
+        echo json_encode(['error' => $e->getMessage()]);
+    }
 }
 
 function putHandler($conn, $input) {
