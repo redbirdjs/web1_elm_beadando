@@ -56,6 +56,10 @@ function App() {
     }
   }
 
+  function handleUpdateFormCancel() {
+    setUpdateFormState(null);
+  }
+
   
   useEffect(() => {
     (async () => {
@@ -71,7 +75,7 @@ function App() {
     <>
       <h1>React Axios CRUD - Szoftverek</h1>
 
-      <form id="update-form" className={updateFormState == null ? "hidden" : ""} onSubmit={handleUpdateFormSubmit}>
+      <form id="update-form" className={updateFormState == null ? "hidden" : ""} onSubmit={handleUpdateFormSubmit} onClick={(e) => e.target === e.currentTarget && handleUpdateFormCancel()}>
         <div className="container">
           <table id="update-table">
             <thead>
@@ -95,8 +99,8 @@ function App() {
           </table>
 
           <div className="data-buttons">
-            <button type='submit' className="green-btn">{updateFormState == "create" ? "Hozzáadás" : "Módosítás"}</button>
-            <button type='button' className="red-btn">Mégse</button>
+            <button type='submit' className="green-btn">{updateFormState === "create" ? "Hozzáadás" : "Módosítás"}</button>
+            <button type='button' className="red-btn" onClick={handleUpdateFormCancel}>Mégse</button>
           </div>
         </div>
       </form>
