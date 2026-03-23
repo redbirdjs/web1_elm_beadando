@@ -168,8 +168,8 @@ function App() {
           {data.map((row, index) => 
             <tr key={index}>
               <td>{row.id}</td>
-              <td>{row.kategoria}</td>
               <td>{row.nev}</td>
+              <td>{row.kategoria}</td>
               <td>
                 <div id="data-index-${index}" className="data-buttons">
                   <button onClick={() => handleUpdateClick(row)}>Módosítás</button>
