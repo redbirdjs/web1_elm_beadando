@@ -86,7 +86,7 @@ td, th {
 
   pointer-events: all;
   opacity: 1;
-  transition: opacity 0.25s;
+  transition: opacity 0.15s;
 }
 
 #update-form.hidden {
