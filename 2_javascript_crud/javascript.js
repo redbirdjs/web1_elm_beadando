@@ -242,6 +242,7 @@ function cAlert(type, message) {
   d.className = `alert ${type}`;
   d.textContent = message;
   document.body.append(d);
+  setTimeout(() => d.remove(), 5000);
 }
 
 function onCreateClick() {
