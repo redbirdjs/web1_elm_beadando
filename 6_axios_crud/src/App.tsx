@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios';
 
+const serverUrl = "/php/backend.php";
+
 type DataRow = { id: number, nev: string, kategoria: string };
 
 function App() {
@@ -13,11 +15,31 @@ function App() {
   const [kategoria, setKategoria] = useState<string>("");
 
 
-  async function _create(data: DataRow) {}
+  async function _create(row: DataRow) {
+    await axios.post(serverUrl, row);
 
-  async function _update(data: DataRow) {}
+    setData(d => [...d, row]);
+  }
 
-  async function _delete(id: number) {}
+  async function _update(row: DataRow) {
+    await axios.put(serverUrl, row);
+
+    setData(d => {
+      const r = d.find(v => v.id === row.id)!;
+      r.nev = row.nev;
+      r.kategoria = row.kategoria;
+      return d;
+    });
+  }
+
+  async function _delete(id: number) {
+    await axios.delete(`${serverUrl}?id=${id}`);
+  
+    setData(d => {
+      const i = d.findIndex(v => v.id === id);
+      return d.splice(i, 1);
+    });
+  }
 
   async function handleCreateClick() {
     setId("");
@@ -35,6 +57,7 @@ function App() {
 
   async function handleDeleteClick(item: DataRow) {
     await _delete(item.id);
+    cAlert("success", "Sikeres adattörlés!");
   }
 
   
@@ -43,21 +66,47 @@ function App() {
     if (!updateFormState) return;
 
     switch (updateFormState) {
-      case 'create':
-        
-        break;
+      case 'create': {
+        const _id = Number(id);
+        const row = data.find(v => v.id === Number(_id));
+        if (row) return cAlert("error", "A megadott ID már foglalt!");
 
-      case 'update':
-        
-        break;
+        const _nev = nev.trim();
+        if (_nev.length === 0) return cAlert("error", "Név mező kitöltése kötelező!");
 
-      default:
+        const _kategoria = kategoria.trim();
+        if (_kategoria.length === 0) return cAlert("error", "Kategória mező kitöltése kötelező!");
+
+        await _create({ id: _id, nev: _nev, kategoria: _kategoria });
         break;
+      }
+      case 'update': {
+        const _nev = nev.trim();
+        if (_nev.length === 0) return cAlert("error", "Név mező kitöltése kötelező!");
+
+        const _kategoria = kategoria.trim();
+        if (_kategoria.length === 0) return cAlert("error", "Kategória mező kitöltése kötelező!");
+
+        await _update({ id: Number(id), nev: _nev, kategoria: _kategoria })
+        break;
+      }
+      default: break;
     }
+
+    cAlert("success", `Sikeres ${updateFormState === 'create' ? 'adatfelvétel' : 'módosítás'}!`)
+    setUpdateFormState(null);
   }
 
   function handleUpdateFormCancel() {
     setUpdateFormState(null);
+  }
+
+  function cAlert(type: 'success' | 'info' | 'error', message: string) {
+    const d = document.createElement("div");
+    d.className = `alert ${type}`;
+    d.textContent = message;
+    document.body.append(d);
+    setTimeout(() => d.remove(), 5000);
   }
 
   
