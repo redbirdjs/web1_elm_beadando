@@ -35,10 +35,9 @@ function App() {
   async function _delete(id: number) {
     await axios.delete(`${serverUrl}?id=${id}`);
   
-    setData(d => {
-      const i = d.findIndex(v => v.id === id);
-      return d.splice(i, 1);
-    });
+    const d = [...data];
+    d.splice(id, 1);
+    setData(d);
   }
 
   async function handleCreateClick() {
