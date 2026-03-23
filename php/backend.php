@@ -14,11 +14,15 @@ switch ($method) {
 }
 
 function getHandler($conn) {
-    $stmt = $conn->prepare('SELECT * FROM szoftver');
-    $stmt->execute();
-    $result = $stmt->fetchAll();
+    try {
+        $stmt = $conn->prepare('SELECT * FROM szoftver');
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
-    echo json_encode($result);
+        echo json_encode($result);
+    } catch (PDOException $e) {
+        echo json_encode(['error' => $e->getMessage()]);
+    }
 }
 
 function postHandler($conn, $input) {
