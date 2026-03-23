@@ -10,7 +10,7 @@ switch ($method) {
     case 'GET': getHandler($conn); break;
     case 'POST': postHandler($conn, $input); break;
     case 'PUT': putHandler($conn, $input); break;
-    case 'delete': deleteHandler($conn, $input); break;
+    case 'DELETE': deleteHandler($conn); break;
 }
 
 function getHandler($conn) {
@@ -52,6 +52,13 @@ function putHandler($conn, $input) {
     }
 }
 
-function deleteHandler($conn, $input) {
+function deleteHandler($conn) {
+    try {
+        $stmt = $conn->prepare('DELETE FROM szoftver WHERE id = :id');
+        $stmt->execute(['id' => $_GET['id']]);
 
+        echo json_encode(['message' => 'Adatsor sikeresen törölve!']);
+    } catch (PDOException $e) {
+        echo json_encode(['error' => $e->getMessage()]);
+    }
 }
