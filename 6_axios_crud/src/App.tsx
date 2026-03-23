@@ -10,15 +10,15 @@ function App() {
   const [data, setData] = useState<DataRow[]>([]);
   
   const [updateFormState, setUpdateFormState] = useState<null | "create" | "update">(null);
-  const [id, setId] = useState<string>("");
+  const [id, setId] = useState<number | null>(null);
   const [nev, setNev] = useState<string>("");
   const [kategoria, setKategoria] = useState<string>("");
 
 
-  async function _create(row: DataRow) {
-    await axios.post(serverUrl, row);
+  async function _create(row: { nev: string, kategoria: string }) {
+    const results = await axios.post(serverUrl, row);
 
-    setData(d => [...d, row]);
+    setData(d => [...d, results.data.result as DataRow]);
   }
 
   async function _update(row: DataRow) {
@@ -34,21 +34,23 @@ function App() {
 
   async function _delete(id: number) {
     await axios.delete(`${serverUrl}?id=${id}`);
-  
-    const d = [...data];
-    d.splice(id, 1);
-    setData(d);
+
+    const items = [...data];
+    const idx = items.findIndex(v => v.id === id);
+    items.splice(idx, 1);
+
+    setData(() => items);
   }
 
   async function handleCreateClick() {
-    setId("");
+    setId(null);
     setNev("");
     setKategoria("");
     setUpdateFormState("create");
   }
 
   async function handleUpdateClick(item: DataRow) {
-    setId(String(item.id));
+    setId(item.id);
     setNev(item.nev);
     setKategoria(item.kategoria);
     setUpdateFormState("update");
@@ -66,27 +68,25 @@ function App() {
 
     switch (updateFormState) {
       case 'create': {
-        const _id = Number(id);
-        const row = data.find(v => v.id === Number(_id));
-        if (row) return cAlert("error", "A megadott ID már foglalt!");
-
         const _nev = nev.trim();
         if (_nev.length === 0) return cAlert("error", "Név mező kitöltése kötelező!");
 
         const _kategoria = kategoria.trim();
         if (_kategoria.length === 0) return cAlert("error", "Kategória mező kitöltése kötelező!");
 
-        await _create({ id: _id, nev: _nev, kategoria: _kategoria });
+        await _create({ nev: _nev, kategoria: _kategoria });
         break;
       }
       case 'update': {
+        if (!id) return;
+
         const _nev = nev.trim();
         if (_nev.length === 0) return cAlert("error", "Név mező kitöltése kötelező!");
 
         const _kategoria = kategoria.trim();
         if (_kategoria.length === 0) return cAlert("error", "Kategória mező kitöltése kötelező!");
 
-        await _update({ id: Number(id), nev: _nev, kategoria: _kategoria })
+        await _update({ id, nev: _nev, kategoria: _kategoria })
         break;
       }
       default: break;
@@ -131,9 +131,6 @@ function App() {
             </thead>
             <tbody>
               <tr>
-                <td>
-                  <input type="number" name="id" id="id" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} required={true} disabled={updateFormState == "update"} />
-                </td>
                 <td>
                   <input type="text" name="nev" id="nev" placeholder="Név" value={nev} onChange={(e) => setNev(e.target.value)} required={true} />
                 </td>
