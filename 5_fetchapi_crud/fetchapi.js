@@ -17,6 +17,7 @@ function refreshTable(data) {
         buttons.appendChild(modifyBtn);
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Törlés";
+        deleteBtn.className = "delete-btn";
         deleteBtn.onclick = () => deleteData(row.id);
         buttons.appendChild(deleteBtn);
 
