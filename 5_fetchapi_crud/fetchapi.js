@@ -24,3 +24,13 @@ function refreshTable(data) {
     }
 }
 
+async function fetchData() {
+    const response = await fetch("/php/backend.php");
+
+    const result = await response.json();
+    data.push(...result);
+
+    refreshTable(data);
+}
+
+fetchData();
