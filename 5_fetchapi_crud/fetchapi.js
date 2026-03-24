@@ -35,6 +35,26 @@ async function fetchData() {
     refreshTable(data);
 }
 
+async function createData() {
+    const nev = document.getElementById("nev");
+    const kategoria = document.getElementById("kategoria");
+
+    const response = await fetch("/php/backend.php", {
+        method: "post",
+        body: JSON.stringify({
+            nev: nev.value,
+            kategoria: kategoria.value
+        })
+    });
+
+    const { result } = await response.json();
+    data.push(result);
+
+    nev.value = "";
+    kategoria.value = "";
+    refreshTable(data);
+}
+
 async function deleteData(id) {
     const response = await fetch(`/php/backend.php?id=${id}`, {
         method: "DELETE"
