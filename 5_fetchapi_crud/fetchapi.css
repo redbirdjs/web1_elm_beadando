@@ -4,3 +4,69 @@
     box-sizing: border-box;
     font-family: Calibri, sans-serif;
 }
+
+main {
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 2rem;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.new-data {
+    margin-bottom: 1rem;
+}
+
+.new-data > form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="text"] {
+    min-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-btn {
+    margin-left: auto;
+    background-color: #2480a8;
+    color: #fff;
+}
+.delete-btn {
+    margin-left: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 5px 100px;
+    text-align: center;
+}
+th {
+    font-size: 1.2rem;
+}
