@@ -10,14 +10,14 @@
             <h1>Fetch API CRUD</h1>
         </header>
         <div class="new-data">
-            <form method="post" action="/php/backend.php">
+            <form>
                 <div>
                     <input type="text" name="nev" id="nev" placeholder="Név" required/>
                 </div>
                 <div>
                     <input type="text" name="kategoria" id="kategoria" placeholder="Kategória" required/>
                 </div>
-                <button type="submit" class="add-btn">Hozzáadás</button>
+                <button type="button" class="add-btn" onclick="createData()">Hozzáadás</button>
             </form>
         </div>
         <table id="data-table">
