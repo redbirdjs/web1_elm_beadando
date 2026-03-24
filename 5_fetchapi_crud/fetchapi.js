@@ -17,6 +17,7 @@ function refreshTable(data) {
         buttons.appendChild(modifyBtn);
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Törlés";
+        deleteBtn.onclick = () => deleteData(row.id);
         buttons.appendChild(deleteBtn);
 
         tr.appendChild(buttons);
@@ -29,6 +30,20 @@ async function fetchData() {
 
     const result = await response.json();
     data.push(...result);
+
+    refreshTable(data);
+}
+
+async function deleteData(id) {
+    const response = await fetch(`/php/backend.php?id=${id}`, {
+        method: "DELETE"
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    const idx = data.findIndex(v => v.id === id);
+    data.splice(idx, 1);
 
     refreshTable(data);
 }
