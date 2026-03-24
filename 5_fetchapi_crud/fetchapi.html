@@ -9,6 +9,15 @@
         <header>
             <h1>Fetch API CRUD</h1>
         </header>
+        <div class="new-data">
+            <form method="post" action="/php/backend.php">
+                <label for="nev">Név</label>
+                <input type="text" name="nev" id="nev" required/>
+                <label for="kategoria">Kategória</label>
+                <input type="text" name="kategoria" id="kategoria" required/>
+                <button type="submit">Hozzáadás</button>
+            </form>
+        </div>
         <table id="data-table">
             <thead>
                 <tr>
