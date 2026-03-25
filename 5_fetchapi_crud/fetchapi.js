@@ -55,6 +55,30 @@ async function createData() {
     refreshTable(data);
 }
 
+function changeToModify(id) {
+    const idx = data.findIndex(v => v.id === id);
+    const rows = document.querySelectorAll("#data-rows tr");
+    const row = rows[idx];
+
+    const cols = row.children;
+    const nevInput = document.createElement("input");
+    nevInput.type = "text";
+    nevInput.value = cols[1].textContent;
+
+    const kategoriaInput = document.createElement("input");
+    kategoriaInput.type = "text";
+    kategoriaInput.value = cols[2].textContent;
+
+    cols[1].innerHTML = '';
+    cols[1].appendChild(nevInput);
+    cols[2].innerHTML = '';
+    cols[2].appendChild(kategoriaInput);
+
+    const confirmButton = cols[3].children[0];
+    confirmButton.innerHTML = "Megerősítés";
+    confirmButton.onclick = () => modifyData(id, { nev: nevInput.value, kategoria: kategoriaInput.value });
+}
+
 async function deleteData(id) {
     const response = await fetch(`/php/backend.php?id=${id}`, {
         method: "DELETE"
