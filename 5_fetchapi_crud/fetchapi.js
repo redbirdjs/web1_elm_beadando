@@ -79,6 +79,23 @@ function changeToModify(id) {
     confirmButton.onclick = () => modifyData(id, { nev: nevInput.value, kategoria: kategoriaInput.value });
 }
 
+async function modifyData(id, newData) {
+    const response = await fetch("/php/backend.php", {
+        method: "PUT",
+        body: JSON.stringify({
+            id: id,
+            ...newData
+        })
+    });
+    const idx = data.findIndex(v => v.id === id);
+    data[idx] = { id, ...newData };
+
+    const result = await response.json();
+    console.log(result);
+
+    refreshTable(data);
+}
+
 async function deleteData(id) {
     const response = await fetch(`/php/backend.php?id=${id}`, {
         method: "DELETE"
