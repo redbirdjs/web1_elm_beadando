@@ -48,11 +48,13 @@ async function createData() {
         })
     });
 
-    const { result } = await response.json();
+    const { message, result } = await response.json();
     data.push(result);
 
     nev.value = "";
     kategoria.value = "";
+
+    cAlert("success", message);
     refreshTable(data);
 }
 
@@ -92,8 +94,8 @@ async function modifyData(id, newData) {
     data[idx] = { id, ...newData };
 
     const result = await response.json();
-    console.log(result);
 
+    cAlert("success", result.message);
     refreshTable(data);
 }
 
@@ -103,12 +105,19 @@ async function deleteData(id) {
     });
 
     const result = await response.json();
-    console.log(result);
-
     const idx = data.findIndex(v => v.id === id);
     data.splice(idx, 1);
 
+    cAlert("success", result.message);
     refreshTable(data);
+}
+
+function cAlert(type, message) {
+    const d = document.createElement("div");
+    d.className = `alert ${type}`;
+    d.textContent = message;
+    document.body.append(d);
+    setTimeout(() => d.remove(), 5000);
 }
 
 fetchData();

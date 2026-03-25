@@ -1,3 +1,9 @@
+:root {
+    --primary-color: #2480a8;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -69,4 +75,42 @@ th, td {
 }
 th {
     font-size: 1.2rem;
+}
+
+.alert {
+    position: fixed;
+    top: -5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #fff;
+    background: var(--danger-color);
+
+    animation: alert-animation 5s ease 0s 1;
+}
+
+.alert.success {
+    background: var(--success-color);
+}
+
+.alert.info {
+    background: var(--primary-color);
+}
+
+@keyframes alert-animation {
+    0% {
+        top: -5rem;
+    }
+    10% {
+        top: 2rem;
+    }
+    90% {
+        top: 2rem;
+    }
+    100% {
+        top: -5rem;
+    }
 }
