@@ -14,6 +14,7 @@ function refreshTable(data) {
         const buttons = document.createElement("td");
         const modifyBtn = document.createElement("button");
         modifyBtn.innerHTML = "Módosítás";
+        modifyBtn.onclick = () => changeToModify(row.id);
         buttons.appendChild(modifyBtn);
         const deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Törlés";
