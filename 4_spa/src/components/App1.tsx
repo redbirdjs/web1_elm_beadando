@@ -25,6 +25,43 @@ export default function App1() {
     set(String(Math.abs(num)));
   }
 
+  const formatTime = (minutes: number) => {
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return h > 0 ? `${h}h ${m}m` : `${m}m`;
+  }
+
+  
+  const lapTime = useMemo(() => {
+    return (parseInt(min) || 0) + (parseInt(sec) || 0) / 60 + (parseInt(ms) || 0) / 60000 || 1
+  }, [min, sec, ms])
+
+  const raceTime = useMemo(() => {
+    const _raceLength = parseInt(raceLength) || 0;
+    return (raceType === 'time' ? _raceLength : Math.round(_raceLength * lapTime));
+  }, [raceType, raceLength, lapTime])
+
+  const raceLaps = useMemo(() => {
+    const _raceLength = parseInt(raceLength) || 0;
+    return (raceType === 'time' ? Math.ceil(raceTime / lapTime) : _raceLength)
+  }, [raceType, raceLength, raceTime, lapTime])
+
+  const totalLength = useMemo(() => {
+    return (raceType === 'time' ? raceLaps : raceTime)
+  }, [raceType, raceLaps, raceTime])
+
+  const minFuel = useMemo(() => {
+    const _fuelPerLap = parseFloat(fuelPerLap) || 0;
+    return Math.ceil(raceLaps * _fuelPerLap);
+  }, [raceLaps, fuelPerLap])
+
+  const recFuel = useMemo(() => {
+    const _fuelPerLap = parseFloat(fuelPerLap) || 0;
+    return Math.ceil((raceLaps + 1.2) * _fuelPerLap);
+  }, [raceLaps, fuelPerLap]);
+
+
+
   return (
     <div className='fuelcalc'>
 
@@ -94,6 +131,27 @@ export default function App1() {
           </div>
         </div>
       </div>
+
+      <div className='col col-w-20'>
+        <div className='row'>
+          <h2>Results</h2>
+        </div>
+
+        <div className='result-row result-main'>
+          <div>Recommended Fuel</div>
+          <div>{recFuel}</div>
+        </div>
+
+        <div className='result-row'>
+          <div>Minimum Fuel</div>
+          <div>{minFuel}</div>
+        </div>
+
+        <div className='result-row'>
+          <div>{raceType === 'time' ? 'Total Laps' : 'Total Time'}</div>
+          <div>{raceType === 'time' ? totalLength : formatTime(totalLength)}</div>
+        </div>
+        </div>
     </div>
   )
 }
