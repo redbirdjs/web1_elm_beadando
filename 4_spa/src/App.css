@@ -16,11 +16,11 @@ header {
   padding: 1rem 1.6rem;
 }
 
-h1 span {
+header h1:nth-child(1) {
   opacity: 0.5;
 }
 
-nav {
+header nav {
   position: relative;
   display: flex;
   overflow: hidden;
@@ -28,7 +28,7 @@ nav {
   background: oklch(20.8% 0.042 265.755);
 }
 
-nav .selected {
+header nav .selected {
   z-index: 1;
   position: absolute;
   left: var(--left);
@@ -40,7 +40,7 @@ nav .selected {
   transition: left 0.25s, width 0.25s;
 }
 
-nav button {
+header nav button {
   z-index: 2;
   padding: 0.6rem 1rem;
   font-size: 1.2rem;
