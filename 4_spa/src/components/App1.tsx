@@ -62,6 +62,24 @@ export default function App1() {
   }, [raceLaps, fuelPerLap]);
 
 
+  const pits = useMemo(() => {
+    const _maxFuel = parseInt(maxFuel);
+    if (isNaN(_maxFuel) || minFuel <= _maxFuel) return [];
+
+    const pitCount = Math.floor(minFuel / _maxFuel);
+    const result = [];
+    const fuelPerPit = Math.min(Math.ceil(recFuel / (pitCount + 1)), 120);
+
+    for (let i = 0; i < pitCount; i++) {
+      result.push({
+        lap: Math.round(((i + 1) / (pitCount + 1)) * raceLaps),
+        fuel: fuelPerPit
+      });
+    }
+
+    return result;
+  }, [minFuel, maxFuel, recFuel, raceLaps]);
+
 
   return (
     <div className='fuelcalc'>
@@ -152,7 +170,30 @@ export default function App1() {
           <div>{raceType === 'time' ? 'Total Laps' : 'Total Time'}</div>
           <div>{raceType === 'time' ? totalLength : formatTime(totalLength)}</div>
         </div>
-        </div>
+
+        {pits.length > 0 && <>
+          <div className='row mt-2'>
+            <h2>Pit Strategy</h2>
+          </div>
+
+          {pits.map((pit, index) => 
+            <div className='pit-row'>
+              <div className='index'>
+                #{index + 1}
+              </div>
+              <div className='pit-data'>
+                <div>Lap</div>
+                <div>{pit.lap}</div>
+              </div>
+              <div className='separator'></div>
+              <div className='pit-data'>
+                <div>Fuel</div>
+                <div>+{pit.fuel}</div>
+              </div>
+            </div>
+          )}
+        </>}
+      </div>
     </div>
   )
 }
