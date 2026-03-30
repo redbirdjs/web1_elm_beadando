@@ -41,7 +41,8 @@ export default function App1() {
 
   const pits = useMemo(() => {
     const _maxFuel = parseInt(maxFuel);
-    if (isNaN(_maxFuel) || minFuel <= _maxFuel) return [];
+    const _fuelPerLap = parseFloat(fuelPerLap) || 0;
+    if (isNaN(_maxFuel) || minFuel <= _maxFuel || _fuelPerLap > _maxFuel) return [];
 
     const pitCount = Math.floor(minFuel / _maxFuel);
     const result = [];
@@ -60,7 +61,7 @@ export default function App1() {
     }
 
     return result;
-  }, [minFuel, maxFuel, recFuel, raceLaps]);
+  }, [minFuel, maxFuel, recFuel, fuelPerLap, raceLaps]);
 
 
   return (
