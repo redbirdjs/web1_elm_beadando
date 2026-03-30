@@ -12,19 +12,22 @@ export default function App1() {
   const [maxFuel, setMaxFuel] = useState<string>('');
 
 
-  const setIntValue = (e: React.ChangeEvent<HTMLInputElement>, set: (value: React.SetStateAction<string>) => void) => {
-    const num = parseInt(e.target.value);
+  const setNumberValue = (e: React.ChangeEvent<HTMLInputElement>, set: (value: React.SetStateAction<string>) => void, parse: (str: string) => number) => {
+    let num = parse(e.target.value);
     if (isNaN(num)) return set('');
 
-    set(String(Math.abs(num)));
+    const min = e.target.min ? Number(e.target.min) : NaN;
+    const max = e.target.max ? Number(e.target.max) : NaN;
+
+    if (!isNaN(min) && num < min) num = min;
+    if (!isNaN(max) && num > max) num = max;
+
+    set(String(num));
   }
 
-  const setFloatValue = (e: React.ChangeEvent<HTMLInputElement>, set: (value: React.SetStateAction<string>) => void) => {
-    const num = parseFloat(e.target.value);
-    if (isNaN(num)) return set('');
+  const setIntValue = (e: React.ChangeEvent<HTMLInputElement>, set: (value: React.SetStateAction<string>) => void) => setNumberValue(e, set, parseInt);
+  const setFloatValue = (e: React.ChangeEvent<HTMLInputElement>, set: (value: React.SetStateAction<string>) => void) => setNumberValue(e, set, parseFloat);
 
-    set(String(Math.abs(num)));
-  }
 
   const formatTime = (minutes: number) => {
     const h = Math.floor(minutes / 60);
