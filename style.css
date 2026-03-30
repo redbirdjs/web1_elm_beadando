@@ -70,6 +70,7 @@ main {
   background: #fff;
 }
 
+/* Feladatok dobozai */
 .box {
   position: relative;
   width: 24rem;
@@ -83,6 +84,7 @@ main {
   --box-animation-duration: 1s;
 }
 
+/* Feladat doboz megjelenő animáció */
 @keyframes box-animation {
   0% {
     opacity: 0;
