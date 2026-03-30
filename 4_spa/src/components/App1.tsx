@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import Input from './App1/Input';
 import './App1.css';
 
 export default function App1() {
@@ -97,10 +98,14 @@ export default function App1() {
         </div>
 
         <div className='row'>
-          <div className='input'>
-            <input type="number" name="raceLength" id="raceLength" value={raceLength} min={0} onChange={(e) => setIntValue(e, setRaceLength)} />
-            <label htmlFor="raceLength">{raceType === 'time' ? 'Race length in minutes' : 'Number of laps'}</label>
-          </div>
+          <Input
+            label={raceType === 'time' ? 'Race length in minutes' : 'Number of laps'}
+            type='number'
+            name='raceLength'
+            min={0}
+            value={raceLength}
+            onChange={(e) => setIntValue(e, setRaceLength)}
+          />
 
           <button className={raceType === 'time' ? 'selected' : ''} onClick={() => setRaceType('time')}>Time</button>
           <button className={raceType === 'laps' ? 'selected' : ''} onClick={() => setRaceType('laps')}>Laps</button>
@@ -121,18 +126,9 @@ export default function App1() {
         </div>
 
         <div className='row'>
-          <div className='input'>
-            <input type="number" name="lapTimeM" id="lapTimeM" value={min} min={0} max={9999} onChange={(e) => setIntValue(e, setMin)} />
-            <label htmlFor="lapTimeM">Minutes</label>
-          </div>
-          <div className='input'>
-            <input type="number" name="lapTimeS" id="lapTimeS" value={sec} min={0} max={59} onChange={(e) => setIntValue(e, setSec)} />
-            <label htmlFor="lapTimeS">Seconds</label>
-          </div>
-          <div className='input'>
-            <input type="number" name="lapTimeMs" id="lapTimeMs" value={ms} min={0} max={999} onChange={(e) => setIntValue(e, setMs)}/>
-            <label htmlFor="lapTimeMs">Miliseconds</label>
-          </div>
+          <Input label='Minutes'     type='number' name='lapTimeM'  min={0} max={9999} value={min} onChange={(e) => setIntValue(e, setMin)} />
+          <Input label='Seconds'     type='number' name='lapTimeS'  min={0} max={59}   value={sec} onChange={(e) => setIntValue(e, setSec)} />
+          <Input label='Miliseconds' type='number' name='lapTimeMs' min={0} max={999}  value={ms}  onChange={(e) => setIntValue(e, setMs)} />
         </div>
 
         <div className='row'>
@@ -140,17 +136,11 @@ export default function App1() {
         </div>
 
         <div className='row'>
-          <div className='input'>
-            <input type="number" name="fuelPerLap" id="fuelPerLap" value={fuelPerLap} min={0} onChange={(e) => setFloatValue(e, setFuelPerLap)} />
-            <label htmlFor="fuelPerLap">Fuel per lap</label>
-          </div>
+          <Input label='Fuel per lap' type='number' name='fuelPerLap' min={0} value={fuelPerLap}  onChange={(e) => setFloatValue(e, setFuelPerLap)} />
         </div>
 
         <div className='row'>
-          <div className='input'>
-            <input type="number" name="fuelPerLap" id="fuelPerLap" value={maxFuel} min={0} onChange={(e) => setIntValue(e, setMaxFuel)} />
-            <label htmlFor="fuelPerLap">Maximum Fuel (Optional)</label>
-          </div>
+          <Input label='Maximum Fuel (Optional)' type='number' name='maxFuel' min={0} value={maxFuel}  onChange={(e) => setIntValue(e, setMaxFuel)} />
         </div>
       </div>
 
