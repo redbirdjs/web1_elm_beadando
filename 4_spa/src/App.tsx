@@ -5,7 +5,7 @@ import App2 from './components/App2'
 
 function App() {
   const apps = [
-    { name: "App1", element: <App1 /> },
+    { name: "Fuel Calculator", element: <App1 /> },
     { name: "App2", element: <App2 /> },
   ];
 
