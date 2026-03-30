@@ -32,7 +32,8 @@ function App() {
   return (
     <div className='container'>
       <header>
-        <h1><span>Single Page Application</span> {apps[currentApp].name}</h1>
+        <h1>Single Page Application</h1>
+        <h1>{apps[currentApp].name}</h1>
         <nav>
           <div className='selected' style={style}></div>
           {apps.map((app, index) =>
