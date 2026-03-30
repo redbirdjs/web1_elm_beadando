@@ -70,6 +70,11 @@ export default function App1() {
     const result = [];
     const fuelPerPit = Math.min(Math.ceil(recFuel / (pitCount + 1)), 120);
 
+    result.push({
+      lap: 0,
+      fuel: fuelPerPit
+    })
+
     for (let i = 0; i < pitCount; i++) {
       result.push({
         lap: Math.round(((i + 1) / (pitCount + 1)) * raceLaps),
@@ -166,20 +171,26 @@ export default function App1() {
           </div>
 
           {pits.map((pit, index) => 
-            <div className='pit-row'>
-              <div className='index'>
-                #{index + 1}
+            pit.lap === 0 ?
+              <div className='result-row result-main pit-start'>
+                <div>Recommended Starting Fuel</div>
+                <div>{pit.fuel}</div>
               </div>
-              <div className='pit-data'>
-                <div>Lap</div>
-                <div>{pit.lap}</div>
+            :
+              <div className='pit-row'>
+                <div className='index'>
+                  #{index + 1}
+                </div>
+                <div className='pit-data'>
+                  <div>Lap</div>
+                  <div>{pit.lap}</div>
+                </div>
+                <div className='separator'></div>
+                <div className='pit-data'>
+                  <div>Fuel</div>
+                  <div>+{pit.fuel}</div>
+                </div>
               </div>
-              <div className='separator'></div>
-              <div className='pit-data'>
-                <div>Fuel</div>
-                <div>+{pit.fuel}</div>
-              </div>
-            </div>
           )}
         </>}
       </div>

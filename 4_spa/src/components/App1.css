@@ -114,6 +114,11 @@
   background: #fff2;
 }
 
+.fuelcalc .pit-start {
+  align-items: center;
+  margin-bottom: 0.1rem;
+}
+
 
 /* INPUTS */
 .fuelcalc .input {
