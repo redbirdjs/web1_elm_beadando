@@ -51,10 +51,6 @@ export default function App1() {
     return (raceType === 'time' ? Math.ceil(raceTime / lapTime) : _raceLength)
   }, [raceType, raceLength, raceTime, lapTime])
 
-  const totalLength = useMemo(() => {
-    return (raceType === 'time' ? raceLaps : raceTime)
-  }, [raceType, raceLaps, raceTime])
-
   const minFuel = useMemo(() => {
     const _fuelPerLap = parseFloat(fuelPerLap) || 0;
     return Math.ceil(raceLaps * _fuelPerLap);
@@ -161,7 +157,7 @@ export default function App1() {
 
         <div className='result-row'>
           <div>{raceType === 'time' ? 'Total Laps' : 'Total Time'}</div>
-          <div>{raceType === 'time' ? totalLength : formatTime(totalLength)}</div>
+          <div>{raceType === 'time' ? raceLaps : formatTime(raceTime)}</div>
         </div>
 
         {pits.length > 0 && <>
