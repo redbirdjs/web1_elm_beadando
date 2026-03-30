@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import './App1.css';
 
 export default function App1() {
   const [raceType, setRaceType] = useState<'time' | 'laps'>('time');
