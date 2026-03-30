@@ -13,7 +13,7 @@ export default function App1() {
   const [fuelPerLap, setFuelPerLap] = useState<string>('');
   const [maxFuel, setMaxFuel] = useState<string>('');
 
-
+  
   const lapTime = useMemo(() => {
     return (parseInt(min) || 0) + (parseInt(sec) || 0) / 60 + (parseInt(ms) || 0) / 60000 || 1
   }, [min, sec, ms])
@@ -35,7 +35,7 @@ export default function App1() {
 
   const recFuel = useMemo(() => {
     const _fuelPerLap = parseFloat(fuelPerLap) || 0;
-    return Math.ceil((raceLaps + 1.2) * _fuelPerLap);
+    return Math.ceil(Math.min((raceLaps + 1.2), (raceLaps * 1.1)) * _fuelPerLap);
   }, [raceLaps, fuelPerLap]);
 
 
