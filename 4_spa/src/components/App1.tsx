@@ -95,7 +95,7 @@ export default function App1() {
 
         <div className='row'>
           <div className='input'>
-            <input type="number" name="raceLength" id="raceLength" value={raceLength} onChange={(e) => setIntValue(e, setRaceLength)} />
+            <input type="number" name="raceLength" id="raceLength" value={raceLength} min={0} onChange={(e) => setIntValue(e, setRaceLength)} />
             <label htmlFor="raceLength">{raceType === 'time' ? 'Race length in minutes' : 'Number of laps'}</label>
           </div>
 
@@ -119,15 +119,15 @@ export default function App1() {
 
         <div className='row'>
           <div className='input'>
-            <input type="number" name="lapTimeM" id="lapTimeM" value={min} onChange={(e) => setIntValue(e, setMin)} />
+            <input type="number" name="lapTimeM" id="lapTimeM" value={min} min={0} max={9999} onChange={(e) => setIntValue(e, setMin)} />
             <label htmlFor="lapTimeM">Minutes</label>
           </div>
           <div className='input'>
-            <input type="number" name="lapTimeS" id="lapTimeS" value={sec} onChange={(e) => setIntValue(e, setSec)} />
+            <input type="number" name="lapTimeS" id="lapTimeS" value={sec} min={0} max={59} onChange={(e) => setIntValue(e, setSec)} />
             <label htmlFor="lapTimeS">Seconds</label>
           </div>
           <div className='input'>
-            <input type="number" name="lapTimeMs" id="lapTimeMs" value={ms} onChange={(e) => setIntValue(e, setMs)}/>
+            <input type="number" name="lapTimeMs" id="lapTimeMs" value={ms} min={0} max={999} onChange={(e) => setIntValue(e, setMs)}/>
             <label htmlFor="lapTimeMs">Miliseconds</label>
           </div>
         </div>
@@ -138,14 +138,14 @@ export default function App1() {
 
         <div className='row'>
           <div className='input'>
-            <input type="number" name="fuelPerLap" id="fuelPerLap" value={fuelPerLap} onChange={(e) => setFloatValue(e, setFuelPerLap)} />
+            <input type="number" name="fuelPerLap" id="fuelPerLap" value={fuelPerLap} min={0} onChange={(e) => setFloatValue(e, setFuelPerLap)} />
             <label htmlFor="fuelPerLap">Fuel per lap</label>
           </div>
         </div>
 
         <div className='row'>
           <div className='input'>
-            <input type="number" name="fuelPerLap" id="fuelPerLap" value={maxFuel} onChange={(e) => setIntValue(e, setMaxFuel)} />
+            <input type="number" name="fuelPerLap" id="fuelPerLap" value={maxFuel} min={0} onChange={(e) => setIntValue(e, setMaxFuel)} />
             <label htmlFor="fuelPerLap">Maximum Fuel (Optional)</label>
           </div>
         </div>
