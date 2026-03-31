@@ -62,14 +62,14 @@ function App() {
   }, []);
 
   return (
-    <main>
-      {
-        modifyIndex !== undefined &&
+      <>
+        {
+            modifyIndex !== undefined &&
             <section className={"modify-form"}>
               <div>
                 <div className={"modify-form-header"}>
                   <h1>Adatok módosítás</h1>
-                  <button className={"modify-form-close"} onClick={closeModifyForm}>X</button>
+                  <button className={"modify-form-close"} onClick={closeModifyForm} title={"Ablak bezárása"}>X</button>
                 </div>
                 <form>
                   <div className={"form-item"}>
@@ -84,63 +84,65 @@ function App() {
                     <label>Kategória</label>
                     <input type="text" id={"kategoria"} name={"kategoria"} value={modifyData[2]} onChange={(e) => handleModifyUpdate(2, e.target.value)} required />
                   </div>
-                  <input type={"submit"} onClick={(e) => updateItem(e, modifyIndex)} className={"btn last"} value={"Módosítás"} />
+                  <input type={"submit"} onClick={(e) => updateItem(e, modifyIndex)} className={"btn modify-btn"} value={"Módosítás"} />
                 </form>
               </div>
             </section>
-      }
-      <h1>React CRUD - Szoftverek</h1>
-      <section>
-        <form className={"add-form"}>
-          <div className={"form-item"}>
-            <label>Id</label>
-            <input type="number" id={"id"} name={"id"} value={id} onChange={(e) => setId(e.target.value)} required />
-          </div>
-          <div className={"form-item"}>
-            <label>Név</label>
-            <input type="text" id={"nev"} name={"nev"} value={nev} onChange={(e) => setNev(e.target.value)} required />
-          </div>
-          <div className={"form-item"}>
-            <label>Kategória</label>
-            <input type="text" id={"kategoria"} name={"kategoria"} value={kategoria} onChange={(e) => setKategoria(e.target.value)} required />
-          </div>
-          <input type={"submit"} onClick={addItem} className={"btn last"} value={"Hozzáadás"} />
-        </form>
-      </section>
-      <section>
-        <h2>Adatok</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Id</th><th>Név</th><th>Kategória</th><th></th>
-            </tr>
-          </thead>
-          <tbody id={"table-body"}>
-            {
-              items.length != 0 ?
-                  items.map((item, index) => {
-                    const data = item.split('\t');
+        }
+        <main>
+          <h1>React CRUD - Szoftverek</h1>
+          <section>
+            <form className={"add-form"}>
+              <div className={"form-item"}>
+                <label>Id</label>
+                <input type="number" id={"id"} name={"id"} value={id} onChange={(e) => setId(e.target.value)} required />
+              </div>
+              <div className={"form-item"}>
+                <label>Név</label>
+                <input type="text" id={"nev"} name={"nev"} value={nev} onChange={(e) => setNev(e.target.value)} required />
+              </div>
+              <div className={"form-item"}>
+                <label>Kategória</label>
+                <input type="text" id={"kategoria"} name={"kategoria"} value={kategoria} onChange={(e) => setKategoria(e.target.value)} required />
+              </div>
+              <input type={"submit"} onClick={addItem} className={"btn add-btn last"} value={"Hozzáadás"} />
+            </form>
+          </section>
+          <section>
+            <h2>Adatok</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Id</th><th>Név</th><th>Kategória</th><th>Műveletek</th>
+                </tr>
+              </thead>
+              <tbody id={"table-body"}>
+                {
+                  items.length != 0 ?
+                      items.map((item, index) => {
+                        const data = item.split('\t');
 
-                    return (
-                        <tr key={index}>
-                          <td>{data[0]}</td>
-                          <td>{data[1]}</td>
-                          <td>{data[2]}</td>
-                          <td>
-                            <div className={"row-actions"}>
-                              <button className={"btn"} onClick={() => handleUpdateClick(index)}>Módosítás</button>
-                              <button className={"btn delete"} onClick={() => deleteItem(index)}>Törlés</button>
-                            </div>
-                          </td>
-                        </tr>
-                    )
-                  })
-                  : <tr><td colSpan={4} className={"empty-table"}>A lista üres.</td></tr>
-            }
-          </tbody>
-        </table>
-      </section>
-    </main>
+                        return (
+                            <tr key={index}>
+                              <td>{data[0]}</td>
+                              <td>{data[1]}</td>
+                              <td>{data[2]}</td>
+                              <td>
+                                <div className={"row-actions"}>
+                                  <button className={"btn"} onClick={() => handleUpdateClick(index)}>Módosítás</button>
+                                  <button className={"btn delete"} onClick={() => deleteItem(index)}>Törlés</button>
+                                </div>
+                              </td>
+                            </tr>
+                        )
+                      })
+                      : <tr><td colSpan={4} className={"empty-table"}>A lista üres.</td></tr>
+                }
+              </tbody>
+            </table>
+          </section>
+        </main>
+      </>
   )
 }
 

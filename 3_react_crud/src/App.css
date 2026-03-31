@@ -5,14 +5,25 @@
   font-family: sans-serif;
 }
 
+main {
+  max-width: 1200px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 10px;
 }
 
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 input[type="text"], input[type="number"] {
   min-width: 200px;
-  padding: 2px 5px;
+  padding: 5px;
   font-size: 1.2rem;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -27,7 +38,10 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .form-item {
@@ -38,7 +52,7 @@ section {
 }
 
 .btn {
-  padding: 5px 30px;
+  padding: 5px 20px;
   border-radius: 100px;
   border: none;
   background-color: #2480a8;
@@ -48,6 +62,9 @@ section {
 }
 .btn:hover {
   background-color: #1d6fa5;
+}
+.add-btn {
+  padding: 10px 20px;
 }
 
 .delete {
@@ -73,6 +90,10 @@ td, th {
   text-align: left;
 }
 
+th {
+  text-align: center;
+}
+
 .empty-table {
   text-align: center;
 }
@@ -92,6 +113,7 @@ td, th {
   background-color: rgba(0, 0, 0, 0.5);
 }
 .modify-form > div {
+  min-width: 400px;
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -101,12 +123,31 @@ td, th {
   gap: 10px;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
+.modify-form-header h1 {
+  margin: 0;
+}
+
+.modify-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
 .modify-form-close {
-  padding: 5px;
-  border: none;
-  border-radius: 50%;
-  background-color: #e74c3c;
-  color: #fff;
   cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  text-align: center;
+  transition: font-size .3s ease;
+}
+.modify-form-close:hover {
+  font-size: 1.4rem;
+  color: #e74c3c;
+}
+.modify-btn {
+  padding: 10px 20px;
+  align-self: center;
 }
