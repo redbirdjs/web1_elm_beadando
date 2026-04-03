@@ -4,76 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OOJS feladat</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Calibri, sans-serif;
-        }
-
-        #gameArea {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background-color: skyblue;
-            overflow: hidden;
-        }
-
-        #score {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        #ground {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: saddlebrown;
-            border-top: 10px solid green;
-        }
-
-        #gameOver {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0,0,0,0.5);
-            cursor: pointer;
-        }
-
-        .game-over {
-            font-weight: bold;
-            font-size: 2rem;
-            color: red;
-            margin-bottom: 10px;
-        }
-
-        .final-score {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .restart-text {
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .game-object {
-            position: absolute;
-        }
-    </style>
+    <link rel="stylesheet" href="oojs.css">
 </head>
 <body>
 <main id="gameArea">
@@ -84,6 +15,7 @@
         <p class="final-score">Pontok: 0</p>
         <p class="restart-text">Új játék kezdése: SPACE vagy bal klikk</p>
     </div>
+    <div class="player"></div>
 </main>
 
 <script src="oojs.js"></script>
