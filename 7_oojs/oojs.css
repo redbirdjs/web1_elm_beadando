@@ -14,6 +14,7 @@
 }
 
 #score {
+    z-index: 10;
     position: absolute;
     top: 20px;
     left: 20px;
@@ -32,6 +33,7 @@
 }
 
 #gameOver {
+    z-index: 100;
     position: absolute;
     top: 0;
     left: 0;
@@ -68,5 +70,6 @@
 }
 
 .player {
-    background: 'assets/bird.png'
+    background: url("./assets/bird.png");
+    background-size: cover;
 }
