@@ -82,7 +82,7 @@ class Pipe {
     constructor(x, gameHeight, gameArea) {
         this.x = x;
         this.width = 50;
-        this.gapHeight = 150;
+        this.gapHeight = 200;
         this.minHeight = 80;
         this.speed = 2;
         this.gameHeight = gameHeight;
@@ -128,7 +128,7 @@ class Game {
         this.isGameOver = false;
         this.pipes = [];
 
-        this.pipeSpawnInterval = 1500;
+        this.pipeSpawnInterval = 2000;
         this.lastPipeSpawnTime = 0;
         this.lastFrameTime = 0;
 
@@ -190,8 +190,7 @@ class Game {
 
     render() {
         this.player.render();
-
-        this.checkCollision();
+        for (const pipe of this.pipes) pipe.render();
     }
 
     checkCollision() {
