@@ -91,4 +91,23 @@ class Game {
         this.groundHeight = document.getElementById('ground').offsetHeight;
 
     }
+
+    setListeners() {
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && !this.isGameOver) {
+                this.player.jump();
+            } else if (e.code === 'Space' && this.isGameOver) {
+                this.restart();
+            }
+        });
+
+        this.gameArea.addEventListener('click', (e) => {
+            if (!this.isGameOver) {
+                this.player.jump();
+            } else {
+                this.restart();
+            }
+        });
+    }
+}
 }
