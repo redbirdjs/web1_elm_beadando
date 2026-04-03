@@ -96,6 +96,21 @@ class Pipe {
         this.topSegment = new PipeSegment(this.x, 0, this.width, this.topPipeHeight, this.gameArea);
         this.bottomSegment = new PipeSegment(this.x, this.bottomPipeY, this.width, this.bottomPipeHeight, this.gameArea);
     }
+
+    update() {
+        this.x -= this.speed;
+        this.topSegment.x = this.x;
+        this.bottomSegment.x = this.x;
+    }
+
+    render() {
+        this.topSegment.render();
+        this.bottomSegment.render();
+    }
+
+    isOffScreen() {
+        return this.x + this.width < 0;
+    }
 }
 
 class Game {
