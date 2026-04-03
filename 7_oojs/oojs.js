@@ -64,6 +64,9 @@ class Player extends GameObject {
 
     update() {
         this.velocity += this.gravity;
+
+        this.element.style.rotate = `${this.velocity*3}deg`;
+
         this.y += this.velocity;
         if (this.y < 0) {
             this.y = 0;
