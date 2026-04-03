@@ -150,8 +150,6 @@ class Game {
         this.lastPipeSpawnTime = 0;
 
         this.fpsLock = 60;
-        this.fixedDeltaT = 1000 / this.fpsLock;
-        this.accumulator = 0;
         this.lastFrameTime = 0;
 
         this.scoreDisplay = document.getElementById('score');
@@ -165,7 +163,6 @@ class Game {
     start() {
         this.lastPipeSpawnTime = performance.now();
         this.lastFrameTime = performance.now();
-        this.accumulator = 0;
         this.loop();
     }
 
@@ -178,20 +175,10 @@ class Game {
         const deltaT = currentTime - this.lastFrameTime;
         this.lastFrameTime = currentTime;
 
-        const maxDelta = 250;
-        this.accumulator += Math.min(deltaT, maxDelta);
-
-        while (this.accumulator >= this.fixedDeltaT) {
-            this.update(this.fixedDeltaT / 1000);
-            this.accumulator -= this.fixedDeltaT;
-
-            this.lastPipeSpawnTime += this.fixedDeltaT;
-        }
-
         this.update(deltaT);
         this.render();
 
-        requestAnimationFrame(this.loop.bind(this));
+        setTimeout(() => this.loop(performance.now()), 1000/this.fpsLock);
     }
 
     update(deltaT) {
