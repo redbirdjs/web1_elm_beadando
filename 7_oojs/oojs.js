@@ -90,6 +90,8 @@ class Game {
         this.gameOverScoreDisplay = document.getElementById('final-score');
         this.groundHeight = document.getElementById('ground').offsetHeight;
 
+        this.setListeners();
+    }
     }
 
     setListeners() {
