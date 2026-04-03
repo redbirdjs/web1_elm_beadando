@@ -148,6 +148,10 @@ class Game {
 
         this.pipeSpawnInterval = 2000;
         this.lastPipeSpawnTime = 0;
+
+        this.fpsLock = 60;
+        this.fixedDeltaT = 1000 / this.fpsLock;
+        this.accumulator = 0;
         this.lastFrameTime = 0;
 
         this.scoreDisplay = document.getElementById('score');
@@ -161,6 +165,7 @@ class Game {
     start() {
         this.lastPipeSpawnTime = performance.now();
         this.lastFrameTime = performance.now();
+        this.accumulator = 0;
         this.loop();
     }
 
@@ -173,6 +178,16 @@ class Game {
         const deltaT = currentTime - this.lastFrameTime;
         this.lastFrameTime = currentTime;
 
+        const maxDelta = 250;
+        this.accumulator += Math.min(deltaT, maxDelta);
+
+        while (this.accumulator >= this.fixedDeltaT) {
+            this.update(this.fixedDeltaT / 1000);
+            this.accumulator -= this.fixedDeltaT;
+
+            this.lastPipeSpawnTime += this.fixedDeltaT;
+        }
+
         this.update(deltaT);
         this.render();
 
@@ -180,7 +195,7 @@ class Game {
     }
 
     update(deltaT) {
-        this.player.update();
+        this.player.update(deltaT);
 
         if (this.lastFrameTime - this.lastPipeSpawnTime > this.pipeSpawnInterval) {
             this.pipes.push(new Pipe(this.width, this.height, this.gameArea));
@@ -189,7 +204,7 @@ class Game {
 
         for (let i = this.pipes.length -1; i >= 0; i--) {
             const pipe = this.pipes[i];
-            pipe.update();
+            pipe.update(deltaT);
 
             if (!pipe.passed && pipe.x + pipe.width < this.player.x) {
                 this.score++;
@@ -263,6 +278,7 @@ class Game {
         this.gameOverOverlay.style.display = 'none';
         this.lastPipeSpawnTime = performance.now();
         this.lastFrameTime = performance.now();
+        this.accumulator = 0;
         this.loop();
     }
 
