@@ -92,6 +92,28 @@ class Game {
 
         this.setListeners();
     }
+
+    start() {
+        this.lastPipeSpawnTime = performance.now();
+        this.lastFrameTime = performance.now();
+        this.loop();
+    }
+
+    loop(currentTime) {
+        if (this.isGameOver) {
+            this.displayGameOver();
+            return;
+        }
+
+        const deltaT = currentTime - this.lastFrameTime;
+        this.lastFrameTime = currentTime;
+
+        this.update(deltaT);
+        this.render();
+
+        requestAnimationFrame(this.loop.bind(this));
+    }
+
     update(deltaT) {
         this.player.update();
     }
