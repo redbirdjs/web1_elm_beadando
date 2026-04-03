@@ -92,6 +92,22 @@ class Game {
 
         this.setListeners();
     }
+    checkCollision() {
+        // ceiling / ground check
+        if (this.player.y + this.player.height >= this.height - this.groundHeight ||
+            this.player.y <= 0
+        ) {
+            this.triggerGameOver();
+        }
+    }
+
+    triggerGameOver() {
+        this.isGameOver = true;
+    }
+
+    displayGameOver() {
+        this.gameOverScoreDisplay.textContent = `Pontok: ${this.score}`;
+        this.gameOverOverlay.style.display = 'flex';
     }
 
     setListeners() {
