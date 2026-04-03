@@ -163,6 +163,29 @@ class Game {
 
     update(deltaT) {
         this.player.update();
+
+        if (this.lastFrameTime - this.lastPipeSpawnTime > this.pipeSpawnInterval) {
+            this.pipes.push(new Pipe(this.width, this.height, this.gameArea));
+            this.lastPipeSpawnTime = this.lastFrameTime;
+        }
+
+        for (let i = this.pipes.length -1; i >= 0; i--) {
+            const pipe = this.pipes[i];
+            pipe.update();
+
+            if (!pipe.passed && pipe.x + pipe.width < this.player.x) {
+                this.score++;
+                pipe.passed = true;
+                this.updateScoreDisplay();
+            }
+
+            if (pipe.isOffScreen()) {
+                pipe.delete();
+                this.pipes.splice(i, 1);
+            }
+        }
+
+        this.checkCollision();
     }
 
     render() {
