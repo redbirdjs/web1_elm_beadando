@@ -169,6 +169,21 @@ class Game {
         this.gameOverOverlay.style.display = 'flex';
     }
 
+    restart() {
+        this.pipes.forEach(pipe => pipe.delete());
+        this.pipes = [];
+        this.player.delete();
+        this.player = new Player(this.width / 4, this.height / 2, this.gameArea, this.height);
+
+        this.score = 0;
+        this.updateScoreDisplay();
+        this.isGameOver = false;
+        this.gameOverOverlay.style.display = 'none';
+        this.lastPipeSpawnTime = performance.now();
+        this.lastFrameTime = performance.now();
+        this.loop();
+    }
+
     setListeners() {
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space' && !this.isGameOver) {
