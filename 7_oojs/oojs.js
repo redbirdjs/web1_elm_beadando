@@ -291,3 +291,5 @@ function initGame() {
 
     game.start();
 }
+
+document.addEventListener('DOMContentLoaded', initGame);
