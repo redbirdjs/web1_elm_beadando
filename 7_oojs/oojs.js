@@ -72,6 +72,32 @@ class Player extends GameObject {
     }
 }
 
+class PipeSegment extends GameObject {
+    constructor(x, y, width, height, gameArea) {
+        super(x, y, width, height, gameArea, 'pipe-segment');
+    }
+}
+
+class Pipe {
+    constructor(x, gameHeight, gameArea) {
+        this.x = x;
+        this.width = 50;
+        this.gapHeight = 150;
+        this.minHeight = 80;
+        this.speed = 2;
+        this.gameHeight = gameHeight;
+        this.gameArea = gameArea;
+
+        this.topPipeHeight = Math.random() * (this.gameHeight - this.gapHeight - 2 * this.minHeight) + this.minHeight;
+        this.bottomPipeY = this.topPipeHeight + this.gapHeight;
+        this.bottomPipeHeight = this.gameHeight - this.bottomPipeY;
+
+        this.passed = false;
+        this.topSegment = new PipeSegment(this.x, 0, this.width, this.topPipeHeight, this.gameArea);
+        this.bottomSegment = new PipeSegment(this.x, this.bottomPipeY, this.width, this.bottomPipeHeight, this.gameArea);
+    }
+}
+
 class Game {
     constructor(gameArea) {
         this.gameArea = gameArea;
@@ -80,6 +106,7 @@ class Game {
         this.player = new Player(this.width / 4, this.height / 2, this.gameArea, this.height);
         this.score = 0;
         this.isGameOver = false;
+        this.pipes = [];
 
         this.pipeSpawnInterval = 1500;
         this.lastPipeSpawnTime = 0;
