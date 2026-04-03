@@ -111,6 +111,11 @@ class Pipe {
     isOffScreen() {
         return this.x + this.width < 0;
     }
+
+    delete() {
+        this.topSegment.delete();
+        this.bottomSegment.delete();
+    }
 }
 
 class Game {
