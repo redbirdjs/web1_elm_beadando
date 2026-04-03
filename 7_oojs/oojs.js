@@ -52,20 +52,28 @@ class Player extends GameObject {
         this.gravity = 0.5;
         this.jumpStrength = 8;
         this.gameHeight = gameHeight;
+
+        this.playerImage = this.initPlayerImage();
+        this.element.appendChild(this.playerImage);
+    }
+
+    initPlayerImage() {
+        const playerImage = document.createElement('img');
+        playerImage.src = './assets/bird.png';
+        playerImage.alt = 'Player';
+        playerImage.classList.add('player-image');
+
+        return playerImage;
     }
 
     jump() {
         this.velocity = -this.jumpStrength;
-        this.element.classList.add('jumping');
-        setTimeout(() => {
-            this.element.classList.remove('jumping');
-        }, 100);
     }
 
     update() {
         this.velocity += this.gravity;
 
-        this.element.style.rotate = `${this.velocity*3}deg`;
+        this.playerImage.style.transform = `rotate(${this.velocity*3}deg)`;
 
         this.y += this.velocity;
         if (this.y < 0) {
