@@ -41,3 +41,11 @@ class GameObject {
         if (this.element.parentNode) this.element.parentNode.removeChild(this.element);
     }
 }
+
+class Player extends GameObject {
+    constructor(x, y, gameArea, gameHeight) {
+        const width = 70;
+        const height = 70;
+        super(x, y, width, height, gameArea, 'player');
+    }
+}
