@@ -71,3 +71,24 @@ class Player extends GameObject {
         }
     }
 }
+
+class Game {
+    constructor(gameArea) {
+        this.gameArea = gameArea;
+        this.width = gameArea.offsetWidth;
+        this.height = gameArea.offsetHeight;
+        this.player = new Player(this.width / 4, this.height / 2, this.gameArea, this.height);
+        this.score = 0;
+        this.isGameOver = false;
+
+        this.pipeSpawnInterval = 1500;
+        this.lastPipeSpawnTime = 0;
+        this.lastFrameTime = 0;
+
+        this.scoreDisplay = document.getElementById('score');
+        this.gameOverOverlay = document.getElementById('gameOver');
+        this.gameOverScoreDisplay = document.getElementById('final-score');
+        this.groundHeight = document.getElementById('ground').offsetHeight;
+
+    }
+}
