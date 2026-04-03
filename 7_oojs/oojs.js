@@ -47,5 +47,27 @@ class Player extends GameObject {
         const width = 70;
         const height = 70;
         super(x, y, width, height, gameArea, 'player');
+
+        this.velocity = 0;
+        this.gravity = 0.5;
+        this.jumpStrength = 8;
+        this.gameHeight = gameHeight;
+    }
+
+    jump() {
+        this.velocity = -this.jumpStrength;
+        this.element.classList.add('jumping');
+        setTimeout(() => {
+            this.element.classList.remove('jumping');
+        }, 100);
+    }
+
+    update() {
+        this.velocity += this.gravity;
+        this.y += this.velocity;
+        if (this.y < 0) {
+            this.y = 0;
+            this.velocity = 0;
+        }
     }
 }
