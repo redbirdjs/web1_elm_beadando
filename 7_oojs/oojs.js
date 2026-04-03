@@ -110,4 +110,10 @@ class Game {
         });
     }
 }
+
+function initGame() {
+    const gameArea = document.getElementById('gameArea');
+    const game = new Game(gameArea);
+
+    game.start();
 }
