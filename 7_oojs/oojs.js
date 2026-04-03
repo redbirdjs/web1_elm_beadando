@@ -116,6 +116,13 @@ class Pipe {
         this.topSegment.delete();
         this.bottomSegment.delete();
     }
+
+    getBounds() {
+        return [
+            this.topSegment.getBounds(),
+            this.bottomSegment.getBounds()
+        ];
+    }
 }
 
 class Game {
