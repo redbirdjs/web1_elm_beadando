@@ -92,6 +92,16 @@ class Game {
 
         this.setListeners();
     }
+    update(deltaT) {
+        this.player.update();
+    }
+
+    render() {
+        this.player.render();
+
+        this.checkCollision();
+    }
+
     checkCollision() {
         // ceiling / ground check
         if (this.player.y + this.player.height >= this.height - this.groundHeight ||
