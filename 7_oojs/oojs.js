@@ -160,6 +160,10 @@ class Game {
         }
     }
 
+    updateScoreDisplay() {
+        this.scoreDisplay.textContent = `Pontok: ${this.score}`;
+    }
+
     triggerGameOver() {
         this.isGameOver = true;
     }
