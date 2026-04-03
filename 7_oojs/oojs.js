@@ -207,6 +207,24 @@ class Game {
         ) {
             this.triggerGameOver();
         }
+
+        const playerBounds = this.player.getBounds();
+
+        for (const pipe of this.pipes) {
+            const pipeBounds = pipe.getBounds();
+
+            const overlapping = (r1, r2) => {
+                return r1.x < r2.x + r2.width &&
+                    r1.x + r1.width > r2.x &&
+                    r1.y < r2.y + r2.height &&
+                    r1.y + r1.height > r2.y;
+            }
+
+            if (overlapping(playerBounds, pipeBounds) || overlapping(playerBounds, pipeBounds[1])) {
+                this.triggerGameOver();
+                break;
+            }
+        }
     }
 
     updateScoreDisplay() {
