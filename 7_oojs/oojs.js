@@ -1,3 +1,5 @@
+let publicGame;
+
 class GameObject {
     constructor(x, y, width, height, gameArea, name = '') {
         this.x = x;
@@ -70,12 +72,12 @@ class Player extends GameObject {
         this.velocity = -this.jumpStrength;
     }
 
-    update() {
-        this.velocity += this.gravity;
+    update(deltaT = 1) {
+        this.velocity += this.gravity * deltaT;
 
         this.playerImage.style.transform = `rotate(${this.velocity*3}deg)`;
 
-        this.y += this.velocity;
+        this.y += this.velocity * deltaT;
         if (this.y < 0) {
             this.y = 0;
             this.velocity = 0;
@@ -108,8 +110,8 @@ class Pipe {
         this.bottomSegment = new PipeSegment(this.x, this.bottomPipeY, this.width, this.bottomPipeHeight, this.gameArea);
     }
 
-    update() {
-        this.x -= this.speed;
+    update(deltaT = 1) {
+        this.x -= this.speed * deltaT;
         this.topSegment.x = this.x;
         this.bottomSegment.x = this.x;
     }
@@ -150,6 +152,8 @@ class Game {
         this.lastPipeSpawnTime = 0;
 
         this.fpsLock = 60;
+        this.fixedDeltaT = 1000 / this.fpsLock;
+        this.accumulator = 0;
         this.lastFrameTime = 0;
 
         this.scoreDisplay = document.getElementById('score');
@@ -175,10 +179,18 @@ class Game {
         const deltaT = currentTime - this.lastFrameTime;
         this.lastFrameTime = currentTime;
 
-        this.update(deltaT);
+        const maxDelta = 250;
+        this.accumulator += Math.min(deltaT, maxDelta);
+
+        while (this.accumulator >= this.fixedDeltaT) {
+            this.update(this.fixedDeltaT / 1000);
+            this.accumulator -= this.fixedDeltaT;
+        }
+
+        this.update();
         this.render();
 
-        setTimeout(() => this.loop(performance.now()), 1000/this.fpsLock);
+        requestAnimationFrame(this.loop.bind(this));
     }
 
     update(deltaT) {
@@ -291,6 +303,7 @@ class Game {
 function initGame() {
     const gameArea = document.getElementById('gameArea');
     const game = new Game(gameArea);
+    publicGame = game;
 
     game.start();
 }
