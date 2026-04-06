@@ -139,7 +139,7 @@ class Pipe {
 }
 
 class Game {
-    constructor(gameArea) {
+    constructor(gameArea, framerate = 60) {
         this.gameArea = gameArea;
         this.width = gameArea.offsetWidth;
         this.height = gameArea.offsetHeight;
@@ -151,9 +151,7 @@ class Game {
         this.pipeSpawnInterval = 2000;
         this.lastPipeSpawnTime = 0;
 
-        this.fpsLock = 60;
-        this.fixedDeltaT = 1000 / this.fpsLock;
-        this.accumulator = 0;
+        this.fpsRatio = 60 / framerate;
         this.lastFrameTime = 0;
 
         this.scoreDisplay = document.getElementById('score');
@@ -179,15 +177,7 @@ class Game {
         const deltaT = currentTime - this.lastFrameTime;
         this.lastFrameTime = currentTime;
 
-        const maxDelta = 250;
-        this.accumulator += Math.min(deltaT, maxDelta);
-
-        while (this.accumulator >= this.fixedDeltaT) {
-            this.update(this.fixedDeltaT / 1000);
-            this.accumulator -= this.fixedDeltaT;
-        }
-
-        this.update();
+        this.update(this.fpsRatio);
         this.render();
 
         requestAnimationFrame(this.loop.bind(this));
@@ -300,9 +290,19 @@ class Game {
     }
 }
 
-function initGame() {
+async function getFPS() {
+    return new Promise(r =>
+        requestAnimationFrame(t1 =>
+            requestAnimationFrame(t2 => r(Math.round(1000 / (t2 - t1))))
+        )
+    );
+}
+
+async function initGame() {
+    const fps = await getFPS();
+
     const gameArea = document.getElementById('gameArea');
-    const game = new Game(gameArea);
+    const game = new Game(gameArea, fps);
     publicGame = game;
 
     game.start();
