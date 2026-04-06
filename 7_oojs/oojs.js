@@ -267,7 +267,6 @@ class Game {
         this.gameOverOverlay.style.display = 'none';
         this.lastPipeSpawnTime = performance.now();
         this.lastFrameTime = performance.now();
-        this.accumulator = 0;
         this.loop();
     }
 
