@@ -245,7 +245,7 @@ class Game {
                     r1.y + r1.height > r2.y;
             }
 
-            if (overlapping(playerBounds, pipeBounds) || overlapping(playerBounds, pipeBounds[1])) {
+            if (overlapping(playerBounds, pipeBounds[0]) || overlapping(playerBounds, pipeBounds[1])) {
                 this.triggerGameOver();
                 break;
             }
