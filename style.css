@@ -131,6 +131,15 @@ main {
   margin-top: 1rem;
   border-radius: 0.2rem;
   object-fit: cover;
+  transition: scale 0.25s 0s, box-shadow 0.25s 0s, z-index 0s 0.25s;
+}
+
+.box img:hover {
+  z-index: 1000;
+  scale: 1.8;
+  box-shadow: #000 0 0 1rem;
+  transition-delay: 0.6s;
+  transition: scale 0.25s 0.6s, box-shadow 0.25s 0.6s, z-index 0s 0s;
 }
 
 .box button {
