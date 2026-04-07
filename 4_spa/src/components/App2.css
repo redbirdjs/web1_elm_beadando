@@ -1,0 +1,44 @@
+.trackguessr {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem auto;
+}
+
+.trackguessr .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.question-display {
+    min-width: 600px;
+    padding: 1rem;
+    background-color: #fff1;
+    border-radius: 0.5rem;
+}
+
+.question-display img {
+    width: 100%;
+}
+
+.answers {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.answers button {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid oklch(44.3% 0.11 240.79);
+    background: transparent;
+    color: #fff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.answers button:hover {
+    background: oklch(44.3% 0.11 240.79);
+}
