@@ -126,7 +126,7 @@ function App() {
           <table id="update-table">
             <thead>
               <tr>
-                <th colSpan={5}>Új adat hozzáadása</th>
+                <th colSpan={5}>Új adat {updateFormState === 'create' ? 'hozzáadása' : 'módosítása'}</th>
               </tr>
             </thead>
             <tbody>
