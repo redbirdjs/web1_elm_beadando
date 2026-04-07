@@ -6,7 +6,7 @@ import App2 from './components/App2'
 function App() {
   const apps = [
     { name: "Fuel Calculator", element: <App1 /> },
-    { name: "App2", element: <App2 /> },
+    { name: "Track Guessr", element: <App2 /> },
   ];
 
   const [currentApp, setCurrentApp] = useState<number>(0);
