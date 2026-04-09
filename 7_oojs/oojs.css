@@ -80,3 +80,28 @@
     background-color: green;
     border: 2px solid darkgreen;
 }
+
+.links {
+    z-index: 120;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    display: flex;
+    gap: 1rem;
+    background-color: #fffa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.links a {
+    text-decoration: none;
+    color: black;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.active-link {
+    font-weight: bold;
+}
