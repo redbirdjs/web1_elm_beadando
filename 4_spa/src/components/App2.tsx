@@ -87,14 +87,24 @@ export default function App2() {
 
     return (
     <div className={'trackguessr'}>
-        <div className={'header'}>
-            <h2>Points: {points}</h2>
-            <h2>Timer: {timer}</h2>
-        </div>
-        <DisplayComponent src={'./img/' + track.layout} />
-        <div className={'answers'}>
-            { answers.map(a => <AnswerButton value={a} clickHandler={handleAnswer} />) }
-        </div>
+        {
+            !gameStarted && isResults &&
+            <ResultsScreen points={points} defaultDifficulty={difficulty} startGame={startGame} />
+        }
+        {
+            gameStarted ?
+                <>
+                    <div className={'header'}>
+                        <h2>Points: {points}</h2>
+                        <h2>Timer: {timeRemaining}</h2>
+                    </div>
+                    <DisplayComponent src={`/img/${qTrack?.layout}`} />
+                    <div className={'answers'}>
+                        { answers.map(a => <AnswerButton value={a} clickHandler={handleAnswer} />) }
+                    </div>
+                </>
+            : (!isResults) && <StartScreen startGame={startGame} defaultDifficulty={difficulty} />
+        }
     </div>
   )
 }
