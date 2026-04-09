@@ -90,15 +90,24 @@ function App() {
             </section>
         }
         <main>
+          <header className={"links"}>
+            <a href="/">Főoldal</a>
+            <a href="/javascript_crud/javascript.html">JavaScript</a>
+            <a className={"active-link"} href="#">React</a>
+            <a href="/spa/spa.html">SPA</a>
+            <a href="/fetchapi_crud/fetchapi.html">Fetch API</a>
+            <a href="/axios_crud/index.html">Axios</a>
+            <a href="/oojs/oojs.html">OOJS</a>
+          </header>
           <h1>React CRUD - Szoftverek</h1>
           <section>
             <form className={"add-form"}>
               <div className={"form-item"}>
                 <label>Id</label>
-                <input type="number" id={"id"} name={"id"} value={id} onChange={(e) => setId(e.target.value)} required />
+                <input type="number" id={"id"} name={"id"} value={id} onChange={(e) => setId(e.target.value)} required/>
               </div>
               <div className={"form-item"}>
-                <label>Név</label>
+              <label>Név</label>
                 <input type="text" id={"nev"} name={"nev"} value={nev} onChange={(e) => setNev(e.target.value)} required />
               </div>
               <div className={"form-item"}>
