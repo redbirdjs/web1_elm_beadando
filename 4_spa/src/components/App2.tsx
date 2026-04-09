@@ -71,6 +71,20 @@ export default function App2() {
         }
     }
 
+    useEffect(() => {
+        if (gameStarted && timeRemaining > 0) {
+            timer.current = setInterval(() => {
+                setTimeRemaining((prevTime) => prevTime - 1);
+            }, 1000);
+        } else if (timeRemaining == 0) {
+            clearInterval(timer.current!);
+            setGameStarted(false);
+            setIsResults(true);
+        }
+
+        return () => clearInterval(timer.current!);
+    }, [gameStarted, timeRemaining]);
+
     return (
     <div className={'trackguessr'}>
         <div className={'header'}>
