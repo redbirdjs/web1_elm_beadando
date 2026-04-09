@@ -1,0 +1,61 @@
+body {
+  color: #fff;
+  background: oklch(27.9% 0.041 260.031);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.6rem;
+}
+
+header h1:nth-child(1) {
+  opacity: 0.5;
+}
+
+header nav {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: 10rem;
+  background: oklch(20.8% 0.042 265.755);
+}
+
+header nav .selected {
+  z-index: 1;
+  position: absolute;
+  left: var(--left);
+  top: 0;
+  width: var(--width);
+  height: 100%;
+  border-radius: 10rem;
+  background: oklch(44.3% 0.11 240.79);
+  transition: left 0.25s, width 0.25s;
+}
+
+header nav button {
+  z-index: 2;
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: transparent;
+}
+
+main {
+  display: flex;
+  flex-grow: 1;
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: oklch(20.8% 0.042 265.755);
+}
