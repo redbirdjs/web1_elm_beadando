@@ -64,12 +64,11 @@ export default function App2() {
     }, [generateAnswers, qTrack.name]);
 
     const handleAnswer = (answer: string) => {
-        if (answer === track.name) {
+        if (answer === qTrack?.name) {
             setPoints(() => points + 10);
         } else {
             setPoints(() => points - 5);
         }
-        setTimer(() => timer -1);
     }
 
     return (
