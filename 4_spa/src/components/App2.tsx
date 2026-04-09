@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 
 import './App2.css'
 import DisplayComponent from './App2/Display'
 import AnswerButton from './App2/AnswerButton'
 
 import Tracks from './App2/tracks.json'
+import StartScreen from './App2/StartScreen'
+import ResultsScreen from './App2/ResultsScreen'
+
+interface TrackList { [k: string]: string }
+type Difficulty = 'easy' | 'normal' | 'hard';
 
 export default function App2() {
     const [points, setPoints] = useState(0);
