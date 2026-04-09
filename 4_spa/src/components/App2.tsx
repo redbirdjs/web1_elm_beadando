@@ -13,7 +13,7 @@ type Difficulty = 'easy' | 'normal' | 'hard';
 
 export default function App2() {
     const [gameStarted, setGameStarted] = useState(false);
-    const [isResults, setIsResults] = useState(true);
+    const [isResults, setIsResults] = useState(false);
     const [points, setPoints] = useState(0);
     const [difficulty, setDifficulty] = useState<Difficulty>('normal');
 
