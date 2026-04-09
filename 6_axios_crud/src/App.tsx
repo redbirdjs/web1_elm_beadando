@@ -119,7 +119,20 @@ function App() {
 
   return (
     <>
-      <h1>React Axios CRUD - Szoftverek</h1>
+      <header>
+        <nav className="links">
+          <a href="/">Főoldal</a>
+          <a href="/javascript_crud/javascript.html">JavaScript</a>
+          <a href="/react_crud/react.html">React</a>
+          <a href="/spa/spa.html">SPA</a>
+          <a href="/fetchapi_crud/fetchapi.html">Fetch API</a>
+          <a className="active-link" href="#">Axios</a>
+          <a href="/oojs/oojs.html">OOJS</a>
+        </nav>
+
+        <h1>React Axios CRUD - Szoftverek</h1>
+      </header>
+      
 
       <form id="update-form" className={updateFormState == null ? "hidden" : ""} onSubmit={handleUpdateFormSubmit} onClick={(e) => e.target === e.currentTarget && handleUpdateFormCancel()}>
         <div className="container">

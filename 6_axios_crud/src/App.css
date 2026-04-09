@@ -35,7 +35,7 @@ button:hover {
 
 h1 {
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem 0 2rem 0;
 }
 
 
@@ -169,4 +169,28 @@ td, th {
   100% {
     top: -5rem;
   }
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  background-color: #fffa;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.links a {
+    text-decoration: none;
+    color: black;
+}
+
+.links a:not(.active-link):hover {
+    text-decoration: underline;
+}
+
+.active-link {
+    font-weight: bold;
+    cursor: default;
 }
