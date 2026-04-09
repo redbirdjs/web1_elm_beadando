@@ -34,7 +34,15 @@ export default function App2() {
         setPoints(0);
     }
 
-    const generateAnswers = (answer: string) => {
+    const getRandomTrack = useCallback(() => {
+        const idx = Math.floor(Math.random() * trackNames.length);
+        const name = trackNames[idx];
+        const layout: string = (Tracks as TrackList)[name];
+
+        return { name, layout };
+    }, [trackNames]);
+
+    const generateAnswers = useCallback((answer: string) => {
         const answers = [answer];
         while (answers.length < 4) {
             const filtered = trackNames.filter(t => !answers.includes(t));
@@ -45,7 +53,7 @@ export default function App2() {
         answers.sort(() => Math.random() - 0.5);
 
         return answers;
-    }
+    }, [trackNames]);
 
     const track = getRandomTrack();
     const answers = generateAnswers(track.name);
