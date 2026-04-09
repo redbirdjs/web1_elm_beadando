@@ -31,6 +31,16 @@ function App() {
 
   return (
     <div className='container'>
+      <nav className="links">
+        <a href="/">Főoldal</a>
+        <a href="/javascript_crud/javascript.html">JavaScript</a>
+        <a href="/react_crud/react.html">React</a>
+        <a className="active-link" href="#">SPA</a>
+        <a href="/fetchapi_crud/fetchapi.html">Fetch API</a>
+        <a href="/axios_crud/index.html">Axios</a>
+        <a href="/oojs/oojs.html">OOJS</a>
+      </nav>
+
       <header>
         <h1>Single Page Application</h1>
         <h1>{apps[currentApp].name}</h1>

@@ -98,7 +98,7 @@ export default function App2() {
                         <h2>Points: {points}</h2>
                         <h2>Timer: {timeRemaining}</h2>
                     </div>
-                    <DisplayComponent src={`/img/${qTrack?.layout}`} />
+                    <DisplayComponent src={`./img/${qTrack?.layout}`} />
                     <div className={'answers'}>
                         { answers.map(a => <AnswerButton value={a} clickHandler={handleAnswer} />) }
                     </div>
