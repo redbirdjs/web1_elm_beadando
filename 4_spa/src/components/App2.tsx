@@ -55,8 +55,13 @@ export default function App2() {
         return answers;
     }, [trackNames]);
 
-    const track = getRandomTrack();
-    const answers = generateAnswers(track.name);
+    const qTrack = useMemo(() => {
+        return getRandomTrack();
+    }, [points, getRandomTrack]);
+
+    const answers = useMemo(() => {
+        return generateAnswers(qTrack.name);
+    }, [generateAnswers, qTrack.name]);
 
     const handleAnswer = (answer: string) => {
         if (answer === track.name) {
