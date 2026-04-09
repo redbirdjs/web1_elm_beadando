@@ -12,16 +12,26 @@ interface TrackList { [k: string]: string }
 type Difficulty = 'easy' | 'normal' | 'hard';
 
 export default function App2() {
+    const [gameStarted, setGameStarted] = useState(false);
+    const [isResults, setIsResults] = useState(true);
     const [points, setPoints] = useState(0);
-    const [timer, setTimer] = useState(60);
-    const trackNames = Object.keys(Tracks);
+    const [difficulty, setDifficulty] = useState<Difficulty>('normal');
 
-    const getRandomTrack = () => {
-        const idx = Math.floor(Math.random() * trackNames.length);
-        const name = trackNames[idx];
-        const layout: string = (Tracks as {[k: string]: string})[name];
+    const timer = useRef<number | null>(null);
+    const [timeRemaining, setTimeRemaining] = useState(60);
 
-        return { name, layout };
+    const trackNames = useMemo(() => Object.keys(Tracks), []);
+
+    const startGame = (diff: 'easy' | 'normal' | 'hard') => {
+        setDifficulty(diff);
+        switch (diff) {
+            case 'easy': setTimeRemaining(60); break;
+            case 'normal': setTimeRemaining(30); break;
+            case 'hard': setTimeRemaining(15); break;
+        }
+        setGameStarted(true);
+        setIsResults(false);
+        setPoints(0);
     }
 
     const generateAnswers = (answer: string) => {
