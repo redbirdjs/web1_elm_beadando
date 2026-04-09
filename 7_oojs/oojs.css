@@ -98,10 +98,11 @@
     color: black;
 }
 
-.links a:hover {
+.links a:not(.active-link):hover {
     text-decoration: underline;
 }
 
 .active-link {
     font-weight: bold;
+    cursor: default;
 }
