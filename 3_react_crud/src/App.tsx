@@ -53,7 +53,7 @@ function App() {
   // adatok betöltése txt fájlból egy tömbbe
   useEffect(() => {
     (async() => {
-      const response = await fetch('/szoftver.txt');
+      const response = await fetch('./szoftver.txt');
 
       const data = (await response.text()).split('\n');
       data.splice(0, 1); // első sor törlése
