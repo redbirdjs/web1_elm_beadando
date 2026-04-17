@@ -65,6 +65,8 @@ header img {
   filter: blur(1rem);
   pointer-events: none;
   user-select: none;
+  width: 100svw;
+  scale: 1.1;
 }
 
 
