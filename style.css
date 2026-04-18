@@ -66,6 +66,7 @@ header img {
   pointer-events: none;
   user-select: none;
   width: 100svw;
+  height: 100%;
   scale: 1.1;
 }
 
